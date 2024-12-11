@@ -123,6 +123,7 @@ button:disabled {
 }
 
 .book {
+  z-index: 1;
   cursor: pointer;
   position: relative;
   width: 14rem;
@@ -178,7 +179,7 @@ button:disabled {
   border-left: 10px double goldenrod;
 }
 .book.view {
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 50%;
   left: 50%;
