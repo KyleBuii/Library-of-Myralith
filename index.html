@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <title>Library of Myralith</title>
+</head>
+<body onload="onLoad()" onbeforeunload="onUnload()">
+    <section class="title">
+        <span>Library of Myralith</span>
+    </section>
+    <section class="controller">
+        <div class="modify">
+            <button id="button-book-create" 
+                onclick="newBook()">New book</button>
+            <button id="button-book-delete"
+                onclick="deleteBook()">Delete book</button>
+        </div>
+        <div id="book-create"
+            class="book">
+            <span id="input-book-name"
+                role="textbox"
+                contenteditable></span>
+            <span id="input-book-author"
+                role="textbox"
+                contenteditable></span>
+            <div id="book-create-button">
+                <button onclick="addBook()">Add</button>
+                <button onclick="cancelBook()">Cancel</button>
+            </div>
+        </div>
+    </section>
+    <section class="library"></section>
+</body>
+</html>

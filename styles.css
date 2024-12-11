@@ -1,0 +1,221 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  margin: 0;
+  color: #daa520;
+}
+
+button {
+  cursor: pointer;
+  color: #daa520;
+  background-color: transparent;
+  border: 2px solid #daa520;
+  border-radius: 10px;
+  transition-property: color border opacity;
+  transition-duration: 0.2s;
+  will-change: scale;
+}
+button:hover {
+  color: #c18c06;
+  border: 2px solid #c18c06;
+}
+button:active {
+  scale: 0.96;
+}
+button:disabled {
+  opacity: 0.4;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(130deg, rgb(121, 143, 93) 0%, rgb(114, 108, 68) 25%, rgb(95, 88, 59) 50%, rgb(114, 108, 68) 75%, rgb(121, 143, 93) 100%);
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding: 4rem 1.4rem 1.5rem;
+  box-shadow: 0px 0px 10px rgb(254, 221, 89);
+  border-bottom: 5px solid rgb(95, 88, 59);
+}
+.title span {
+  z-index: 1;
+  position: relative;
+  border: 5px solid #daa520;
+  padding: 0.8rem;
+  text-shadow: 0px 0px 5px #c18c06;
+}
+.title span::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -15px;
+  width: 0;
+  height: 0;
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-bottom: 50px solid #daa520;
+}
+.title span::after {
+  content: "";
+  width: 110%;
+  height: 100%;
+  position: absolute;
+  top: -5px;
+  left: -5%;
+  border-top: 5px solid #daa520;
+  border-bottom: 5px solid #daa520;
+  box-shadow: 0px 8px 4px -4px #936b07;
+}
+.title::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -15px;
+  width: 6em;
+  height: 6em;
+  transform: scale(1, -1);
+  background-image: url(/images/title-border.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.5;
+}
+.title::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -15px;
+  width: 6em;
+  height: 6em;
+  transform: scale(-1, -1);
+  background-image: url(/images/title-border.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.5;
+}
+
+.controller {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0rem;
+}
+
+.modify {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.library {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  row-gap: 2em;
+  justify-items: center;
+}
+
+.book-overlay.ready-to-perish {
+  padding: 1rem;
+  border: 6px solid rgb(255, 0, 0);
+  border-radius: 10px;
+}
+
+.book {
+  cursor: pointer;
+  position: relative;
+  width: 14rem;
+  height: 18rem;
+  background: black;
+  padding-left: 1rem;
+  box-shadow: 0px 0px 10px black;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  border-right: 2px solid rgba(0, 0, 0, 0.2);
+  transition-property: scale;
+  transition-duration: 1s;
+  will-change: scale;
+}
+.book span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  margin: 0rem 0.6rem 0rem 1.4rem;
+  outline: none;
+  overflow: hidden;
+}
+.book span:first-child {
+  padding: 1rem;
+  padding-top: 2rem;
+  border-bottom: 2px solid #daa520;
+}
+.book span:first-child[contenteditable]:empty::before {
+  cursor: text;
+  content: "Title";
+}
+.book span:nth-child(2) {
+  width: 10rem;
+  font-size: small;
+  font-style: normal;
+  padding-top: 0.4rem;
+  margin-left: 2.85em;
+}
+.book span:nth-child(2)[contenteditable]:empty::before {
+  cursor: text;
+  content: "Author";
+}
+.book:hover {
+  scale: 1.05;
+}
+.book::before {
+  content: "";
+  display: block;
+  float: left;
+  height: 100%;
+  border-left: 10px double goldenrod;
+}
+.book.view {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: top left;
+  scale: 2;
+}
+.book.red {
+  background: linear-gradient(90deg, rgb(193, 0, 0) 0%, rgb(255, 0, 0) 50%, rgb(193, 0, 0) 100%);
+}
+.book.purple {
+  background: linear-gradient(90deg, rgb(152, 96, 124) 0%, rgb(184, 115, 150) 50%, rgb(152, 96, 124) 100%);
+}
+.book.blue {
+  background: linear-gradient(90deg, rgb(73, 98, 131) 0%, rgb(90, 123, 166) 50%, rgb(73, 98, 131) 100%);
+}
+.book.green {
+  background: linear-gradient(90deg, rgb(104, 133, 135) 0%, rgb(134, 173, 176) 50%, rgb(104, 133, 135) 100%);
+}
+.book.pink {
+  background: linear-gradient(90deg, rgb(207, 181, 176) 0%, rgb(241, 212, 207) 50%, rgb(207, 181, 176) 100%);
+}
+
+#book-create {
+  display: none;
+}
+#book-create #book-create-button {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.8rem;
+}
+#book-create:hover {
+  scale: unset;
+}
+
+@media (max-width: 500px) {
+  .book.view {
+    scale: 1.5;
+  }
+}/*# sourceMappingURL=styles.css.map */
