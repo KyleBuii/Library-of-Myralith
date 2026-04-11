@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './styles.scss';
 
 const bookColors = ['red', 'purple', 'blue', 'green', 'pink'];
@@ -10,6 +10,9 @@ const Homepage = () => {
             ?? [{ name: 'The Story of Dranksfe', author: 'Kyle Bui', color: 'red', }]
     });
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isShowLibrary, setIsShowLibrary] = useState(true);
+
+    const refPage = useRef(null);
 
     useEffect(() => {
         return () => {
@@ -34,23 +37,38 @@ const Homepage = () => {
 
     const clickBook = (bookIndex) => {
         setCurrentIndex(bookIndex);
+        setIsShowLibrary(false);
+        refPage.current.classList.toggle('show');
+    };
+
+    const clickPage = () => {
+        setIsShowLibrary(true);
+        refPage.current.classList.toggle('show');
     };
 
     return (
-        <section>
+        <section className='app'>
             <section className='title'>
                 <span>Library of Myralith</span>
             </section>
-            <section className='library'>
-                {books.map((book, bookIndex) => {
-                    return <div className={`book ${book.color}`}
-                        onClick={() => clickBook(bookIndex)}
-                        key={book.name}>
-                        <span>{book.name}</span>
-                        <span>{book.author}</span>
-                    </div>
-                })}
+            <section ref={refPage}
+                className={`page ${books[currentIndex].color}`}
+                onClick={clickPage}>
+                <span className='page-title'>{books[currentIndex].name}</span>
+                <span>{books[currentIndex].author}</span>
             </section>
+            {isShowLibrary
+                && <section className='library'>
+                    {books.map((book, bookIndex) => {
+                        return <div className={`book ${book.color}`}
+                            onClick={() => clickBook(bookIndex)}
+                            key={book.name}>
+                            <span>{book.name}</span>
+                            <span>{book.author}</span>
+                        </div>
+                    })}
+                </section>
+            }
         </section>
     );
 };
