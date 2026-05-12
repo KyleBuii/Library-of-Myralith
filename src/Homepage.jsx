@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import './styles.scss';
 
 const colorsBase = {
@@ -26,7 +28,6 @@ const colorsBase = {
     gray        : '#6c757d',
     black       : '#000000',
 };
-
 const colorsGradient = {
     purpleBlue         : `linear-gradient(135deg, ${colorsBase.purple}, ${colorsBase.blue})`,
     softPinkGreen      : `linear-gradient(135deg, ${colorsBase.softPink}, ${colorsBase.green})`,
@@ -91,21 +92,84 @@ const Homepage = () => {
     const [deities, setDeities] = useState({});
     const [currentDeity, setCurrentDeity] = useState('');
     const [isShowLibrary, setIsShowLibrary] = useState(true);
-    
+    const [activeDeities, setActiveDeities] = useState([]);
+    const [particleEngine, setParticleEngine] = useState(false);
+
     const refPage = useRef(null);
 
     const deity = deities[currentDeity];
+
+    const particleOption = useMemo(() => ({
+        particles: {
+            rotate: {
+                value: 0,
+                random: true,
+                direction: 'clockwise',
+                animation: {
+                    enable: true,
+                    speed: 5,
+                    sync: false
+                },
+            },
+            move: {
+                direction: 'none',
+                enable: true,
+                outModes: 'bounce',
+                speed: 2,
+            },
+            number: {
+                density: { enable: true },
+                value: activeDeities.length,
+            },
+            random: { enable: false },
+            opacity: { value: 0.5 },
+            shape: {
+                type: 'image',
+                options: {
+                    image: activeDeities.map((name) => ({
+                        name,
+                        src: `/deities/${name}.webp`,
+                        width: 32,
+                        height: 32,
+                    })),
+                },
+            },
+            size: {
+                value: { min: 16, max: 32 }
+            },
+            preload: activeDeities.map((name) => ({
+                name,
+                src: `/deities/${name}.webp`,
+                width: 32,
+                height: 32,
+            })),
+        },
+    }), [activeDeities]);
 
     useEffect(() => {
         fetch('/deities.json')
             .then((response) => response.json())
             .then((json) => setDeities(json))
             .catch((error) => console.error(error));
+
+        if (particleEngine) return;
+
+        initParticlesEngine(async (engine) => {
+            await loadSlim(engine);
+        }).then(() => {
+            setParticleEngine(true);
+        });
     }, []);
 
-    const clickBook = (deity) => {
+    const clickBook = async (deity) => {
         setCurrentDeity(deity);
         setIsShowLibrary(false);
+
+        const reformatName = deity.toLowerCase().replace(/\s+/g, '-');
+        const doesImageExist = await imageExists(`/deities/${reformatName}.webp`);
+
+        if (doesImageExist) setActiveDeities((prev) => prev.includes(name) ? prev : [...prev, reformatName]);
+
         refPage.current.classList.toggle('show');
     };
 
@@ -114,8 +178,19 @@ const Homepage = () => {
         refPage.current.classList.toggle('show');
     };
 
+    const imageExists = (image) => {
+        return new Promise((resolve) => {
+            const checkImage = new Image();
+
+            checkImage.onload = () => resolve(true);
+            checkImage.onerror = () => resolve(false);
+            checkImage.src = image;
+        });
+    };
+
     return (
         <section className='app'>
+            {particleEngine && (activeDeities.length > 0) && <Particles options={particleOption}/>}
             <section className='title'>
                 <span>Library of Myralith</span>
             </section>
@@ -128,8 +203,8 @@ const Homepage = () => {
                     <span>{deity?.culture}</span>
                 </div>
                 <div className='page-domain'>
-                    {deity?.domain.map((text) => {
-                        return <span>{text}</span>
+                    {deity?.domain.map((text, textIndex) => {
+                        return <span key={`text ${textIndex}`}>{text}</span>
                     })}
                 </div>
                 <div>
@@ -154,10 +229,9 @@ const Homepage = () => {
                             <span>{deityData.culture}</span>
                         </div>
                     })}
-                </section>
-            }
+                </section>}
         </section>
     );
 };
 
-export default Homepage;
+export default memo(Homepage);
