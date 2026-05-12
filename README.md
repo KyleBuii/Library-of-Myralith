@@ -2,4 +2,4 @@
 Web application for viewing information about Deities.
 
 ## Sources
-- [Dhat-Badan](https://opengameart.org/content/vector-slime) by mailbun
+- [Deities Icons](https://openmoji.org/) by OpenMoji
