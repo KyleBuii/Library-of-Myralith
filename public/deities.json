@@ -1,9 +1,38 @@
 {
 	"Ayao": {
         "culture": "Yoruba",
-        "domain": ["Spiritual forces"],
-        "color": "Purple Gray",
-        "description": "A lesser-known orisha tied to subtle energies.",
-        "fact": ["Very little detailed mythology survives."]
+		"weapon": "Crossbow",
+		"artifacts": "Quill and Nine stones",
+		"animals": "Serpent",
+		"siblings": ["Oya"],
+        "domain": ["Air", "Forest", "Tornado", "Whirlwind"],
+        "color": "Brown Green",
+        "description": "Orisha of negativity.",
+        "fact": ["Works closely with Qsanyin.", "Fierce warrior.", "Her ritual involves feathers, gourds, and machetes to symbolize her swift and protective nature.", "Ceremonies held in sacred groves or near ceiba trees.", "Call upon her energies to aid in transformation and to dispel negativity."]
+    },
+	"Dhat-Badan": {
+        "culture": "Himyarite",
+        "domain": ["Oasis", "Nature", "Wet Season"],
+        "color": "Purple Blue",
+		"abilities": ["Controlling and sustaining the life-giving forces of nature."],
+        "description": "Goddess of nature.",
+        "fact": ["Any invocation with no seeress or priestess (hlmt, 'Dreamer') present in her sanctuary is forbidded.", "In the sanctuary, the priestess would lie down and sleep before the sacred tree(s) of the goddess to recieve an oracle in the form of a prophetic dream."]
+    },
+	"Atete": {
+        "culture": "Oromo",
+        "domain": ["Fertility", "Motherhood", "Life"],
+        "color": "Pink Green",
+        "description": "Goddess of fertility.",
+        "fact": ["Rite performed by women seeking aid in childbirth, personal fetility, or livestock abundance.", "Non-violent."]
+    },
+	"Asase Ya": {
+        "culture": "Akan",
+		"siblings": ["Nyame", "Tano", "Ananse"],
+		"spouse": "Nyankapon",
+        "domain": ["Fertility", "Love", "Procreation", "Peace", "Truth"],
+        "color": "Brown Green",
+		"abilities": ["Successful crops.", "Stable weather.", "Oversees truth and moral order."],
+        "description": "Goddess of the dead and truth.",
+        "fact": ["Mother of the Dead.", "Worshipped in agricultural fields.", "Sacrifices are given for favour and blessings.", "Two different personalities, but are both one deity: an old woman and a youthful, incredibly beautiful woman."]
     }
 }

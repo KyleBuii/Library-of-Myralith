@@ -217,6 +217,7 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         width: 90%;
         padding: 1rem;
         border-bottom: 2px solid rgba(0, 0, 0, 0.1);
@@ -243,9 +244,7 @@ button {
     font-size: 2rem;
 }
 
-.page-domain {
-    display: flex;
-    flex-direction: row;
+.page-domain, .page-fact, .page-equipment, .page-abilities {
     gap: 1rem;
 
     span:not(:last-child) {
